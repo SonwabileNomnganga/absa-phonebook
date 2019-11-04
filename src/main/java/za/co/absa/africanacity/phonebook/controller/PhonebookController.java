@@ -24,6 +24,7 @@ public class PhonebookController {
     public String phonebook(Model model){
 
         model.addAttribute("entries", phonebookService.getAllEntries());
+        log.info("" + phonebookService.getAllPhonebooks());
         return "phonebook";
     }
 
@@ -47,7 +48,7 @@ public class PhonebookController {
         if(valid(entry, model)) {
 
             entry.setName(entry.getName().toUpperCase());
-            entry.setName(entry.getSurname().toUpperCase());
+            entry.setSurname(entry.getSurname().toUpperCase());
 
             log.info("Saving entry <" + entry + ">");
             phonebookService.addEntry(entry);

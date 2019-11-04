@@ -3,7 +3,9 @@ package za.co.absa.africanacity.phonebook.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.absa.africanacity.phonebook.domain.Entry;
+import za.co.absa.africanacity.phonebook.domain.Phonebook;
 import za.co.absa.africanacity.phonebook.repository.EntryRepository;
+import za.co.absa.africanacity.phonebook.repository.PhonebookRepository;
 import za.co.absa.africanacity.phonebook.service.PhonebookService;
 
 import java.util.List;
@@ -14,6 +16,9 @@ public class PhonebookServiceImpl implements PhonebookService {
 
     @Autowired
     private EntryRepository repository;
+
+    @Autowired
+    private PhonebookRepository phonebookRepository;
 
     @Override
     public void addEntry(Entry entry) {
@@ -55,5 +60,10 @@ public class PhonebookServiceImpl implements PhonebookService {
     @Override
     public void deleteById(int id) {
         repository.deleteById(new Long(id));
+    }
+
+    @Override
+    public List<Phonebook> getAllPhonebooks() {
+        return phonebookRepository.findAll();
     }
 }

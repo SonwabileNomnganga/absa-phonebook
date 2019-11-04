@@ -1,6 +1,7 @@
 package za.co.absa.africanacity.phonebook.service;
 
 import za.co.absa.africanacity.phonebook.domain.Entry;
+import za.co.absa.africanacity.phonebook.domain.Phonebook;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +21,6 @@ public interface PhonebookService {
     Optional<Entry> findById(int id);
 
     void deleteById(int id);
+
+    List<Phonebook> getAllPhonebooks();
 }
