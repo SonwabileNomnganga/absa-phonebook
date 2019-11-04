@@ -28,13 +28,13 @@ public class PhonebookIntegrationTest {
 
     private final static String MEDIA_TYPE = "text/html;charset=UTF-8";
 
-    /*@Test
+    @Test
     public void testIfCanReachPhonebookLaunchEndpoint() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/phonebook"))
                 .andExpect(MockMvcResultMatchers.content().contentType(MEDIA_TYPE))
                 .andExpect(status().isOk());
-    }*/
+    }
 
     @Test
     public void testIfCanReachPhonebookAddNewEndpoint() throws Exception {
@@ -60,17 +60,17 @@ public class PhonebookIntegrationTest {
                 .andExpect(status().isOk());
     }
 
-    /*@Test
+    @Test
     public void testIfCanReachPhonebookUpdateEndpoint() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/entry/update?name=WEW&surname=123443&number=123456"))
                 .andExpect(status().isOk());
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void testIfCanReachPhonebookDeleteEndpoint() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/entry/delete?id=1"))
                 .andExpect(status().isOk());
-    }*/
+    }
 }
