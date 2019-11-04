@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Absa phonebook system</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style media="screen">
+        body {
+    font: 1em/1.62em verdana, sans-serif;
+    background-color: whitesmoke;
+}
+form {
+    max-width: 58em;
+    padding: 1em;
+    margin: auto;
+    background-color: #6b7f7f;
+    #border: 0.25em solid #316ed6;
+    color: #31d8eb;
+    text-align: center;
+}
+form fieldset {
+    border: 0.1em solid #31d8eb;
+}
+form legend{
+    display: inline-block;
+}
+form div {
+    margin: 1em 0;
+}
+form label,form input{
+    display: inline-block;
+    width: 8em;
+}
+form input {
+    padding: 0.25em;
+}
+
+    </style>
+</head>
+<body>
+
+<form th:action="@{/addnew}" method="get" id="addForm">
+
+    <h2>ABSA PHONEBOOK</h2>
+    <div th:if="${deleted}">
+        Successfully deleted entry.
+    </div>
+    <fieldset><legend> Entries</legend>
+        <div th:if="${not #lists.isEmpty(entries)}">
+            <table align="centre">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Number</th>
+                    <th>Actions</th>
+                </tr>
+                <tr th:each="entry, iStat : ${entries}" th:style="${iStat.odd}? 'font-weight: normal;'">
+                    <td th:text="${entry.name}"></td>
+                    <td th:text="${entry.surname}"></td>
+                    <td th:text="${entry.number}"></td>
+                    </td>
+                    <td>
+                        <a href="#" data-th-href="@{/entry/edit(id=${entry.id})}">edit
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" data-th-href="@{/entry/delete(id=${entry.id},phase=stage)}">delete
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <input type="submit" value="Add New Entry"/>
+        </div>
+    </fieldset>
+</form>
+<form th:action="@{/search}" method="get" id="searchForm">
+    <fieldset>
+        <legend>Search for entries</legend>
+        <div>
+            <label for="option"> Search By: </label>
+            <select id="option" name="option">
+                <option value="name">Name</option>
+                <option value="surname">Surname</option>
+                <option value="number">Number</option>
+            </select>
+            <input type="text" id="search" name="search"/>
+            <input type="submit" value="Search"/>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

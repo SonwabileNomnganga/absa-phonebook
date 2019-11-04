@@ -1,0 +1,57 @@
+image: maven:3.3.9-jdk-8
+
+stages:
+  - report
+  - test
+  - build
+  - deploy
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+mvn_sonar:
+  stage: report
+  script:
+    - echo "Starting code coverage..."
+    - mvn verify
+  tags:
+    - build
+
+test:
+  stage: test
+  script:
+    - echo "Testing starting..........."
+    - mvn $MAVEN_CLI_OPTS test
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
+  tags:
+    - build
+
+build:
+  stage: build
+  script:
+    - echo "Building starting..........."
+    - mvn compile
+  tags:
+    - build
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying artifacts to nexus..........."
+    - cat "~/.m2/settings.xml"
+    - mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true
+    - echo "installing the package in local repository"
+    #only:
+    #- master
+  tags:
+    - build

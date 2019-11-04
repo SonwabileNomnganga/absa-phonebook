@@ -1,0 +1,29 @@
+body {
+    font: 1em/1.62em verdana, sans-serif;
+    background-color: whitesmoke;
+}
+form {
+    max-width: 58em;
+    padding: 1em;
+    margin: auto;
+    background-color: #6b7f7f;
+    #border: 0.25em solid #316ed6;
+    color: #31d8eb;
+    text-align: center;
+}
+form fieldset {
+    border: 0.1em solid #31d8eb;
+}
+form legend{
+    display: inline-block;
+}
+form div {
+    margin: 1em 0;
+}
+form label,form input{
+    display: inline-block;
+    width: 8em;
+}
+form input {
+    padding: 0.25em;
+}
