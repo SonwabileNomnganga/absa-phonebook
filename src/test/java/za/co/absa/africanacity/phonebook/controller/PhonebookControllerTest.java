@@ -72,17 +72,6 @@ public class PhonebookControllerTest {
         Assert.assertEquals(REDIRECT_PHONEBOOK, resource);
     }
 
-    @Ignore
-    public void testThatTheAddEntryMethodCalledWhenAddingNewEntry(){
-
-        String resource = phonebookController.add(entry, model, ACTION_CANCEL);
-
-        verify(phonebookService, times(1)).getAllEntries();
-        verify(phonebookService, times(1)).addEntry(entry);
-
-        Assert.assertEquals(REDIRECT_PHONEBOOK, resource);
-    }
-
     @Test
     public void testFindBuyNameIsCalledAndOthersSearchesAreNot() {
 

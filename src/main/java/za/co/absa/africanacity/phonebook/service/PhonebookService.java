@@ -23,4 +23,6 @@ public interface PhonebookService {
     void deleteById(int id);
 
     List<Phonebook> getAllPhonebooks();
+
+    void savePhonebook(Phonebook phonebook);
 }

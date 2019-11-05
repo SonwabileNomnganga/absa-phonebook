@@ -61,13 +61,6 @@ public class PhonebookIntegrationTest {
     }
 
     @Test
-    public void testIfCanReachPhonebookUpdateEndpoint() throws Exception {
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/entry/update?name=WEW&surname=123443&number=123456"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     public void testIfCanReachPhonebookDeleteEndpoint() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/entry/delete?id=1"))

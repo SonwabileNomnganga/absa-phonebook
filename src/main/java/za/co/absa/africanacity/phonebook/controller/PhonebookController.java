@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import za.co.absa.africanacity.phonebook.domain.Entry;
+import za.co.absa.africanacity.phonebook.domain.Phonebook;
 import za.co.absa.africanacity.phonebook.service.PhonebookService;
 
 @Slf4j
@@ -51,8 +52,10 @@ public class PhonebookController {
             entry.setSurname(entry.getSurname().toUpperCase());
 
             log.info("Saving entry <" + entry + ">");
-            phonebookService.addEntry(entry);
-            model.addAttribute("entries", phonebookService.getAllEntries());
+            Phonebook phonebook = phonebookService.getAllPhonebooks().get(0);
+            phonebook.getEntries().add(entry);
+            phonebookService.savePhonebook(phonebook);
+            model.addAttribute("entries", phonebookService.getAllPhonebooks().get(0).getEntries());
 
             return "redirect:phonebook";
         }
@@ -72,27 +75,6 @@ public class PhonebookController {
             model.addAttribute("entries", phonebookService.findByNumber(search.toUpperCase()));
 
         return "phonebook";
-    }
-
-    @GetMapping(value="/entry/update")
-    public String update(@ModelAttribute(value="entry") Entry entry,  Model model, @RequestParam(value="action", required = false) String action) {
-
-        if(ACTION_CANCEL.equals(action)) {
-            model.addAttribute("entries", phonebookService.getAllEntries());
-            return "phonebook";
-        }
-
-        phonebookService.addEntry(entry);
-        model.addAttribute("entries", phonebookService.getAllEntries());
-
-        return "phonebook";
-    }
-
-    @GetMapping(value="/entry/edit")
-    public String edit(@RequestParam(value="id") int id, Model model) {
-
-        model.addAttribute("entry", phonebookService.findById(id).get());
-        return "edit";
     }
 
     @GetMapping(value="/entry/delete")

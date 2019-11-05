@@ -66,4 +66,9 @@ public class PhonebookServiceImpl implements PhonebookService {
     public List<Phonebook> getAllPhonebooks() {
         return phonebookRepository.findAll();
     }
+
+    @Override
+    public void savePhonebook(Phonebook phonebook) {
+        phonebookRepository.saveAndFlush(phonebook);
+    }
 }
